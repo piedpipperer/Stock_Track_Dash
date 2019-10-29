@@ -1,3 +1,11 @@
+### MBP for Stock Market Monitoring 
+
+Open the following link to test the app: 
+https://stock-market-dash.herokuapp.com/
+
+It is basicaly an MBP but plan to extend it into new things in the future, for docum related to Dash:
+
+
 # Dash
 
 [![CircleCI](https://img.shields.io/circleci/project/github/plotly/dash/master.svg)](https://circleci.com/gh/plotly/dash)
