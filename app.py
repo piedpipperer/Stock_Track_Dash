@@ -10,6 +10,7 @@ Created on Mon Oct 14 18:23:35 2019
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 #import iexfinance
 from dash.dependencies import Output, Input, State
 
@@ -195,47 +196,67 @@ def update_news(input_value="TSLA"):
 
 
 app = dash.Dash(
-    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
+    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"},]
+    , external_stylesheets=[dbc.themes.DARKLY]
 )
+app.title = 'Stock Market Monitor'
 
 server = app.server
 
 
-app.layout = html.Div( 
-                    className="row",
-                    children=[html.Div(#className="row",
-                       html.H1(children="Stock Monitor")),
-              
-        html.Div([ dcc.Input(id="stock-input", value="GE", type="text")
+app.layout = dbc.ModalBody( 
+       
+                    #className="row",
+                    children=[#className="row",
+                      dbc.Row(   dbc.ModalHeader("Stock Monitor"))
+    
+    ,      
+        dbc.Row([ dcc.Input(id="stock-input", value="GE", type="text")
                   ,html.Button(id="submit-stock-button",n_clicks=0,children="Submit")
         ])
               
         ,html.Div(style = {"display":"flex"}
             ,children=[
                 # Column for user controls
-                html.Div(className="column"
-                         ,style={"width": "49.75%"}
-                         ,children=[
+                dbc.Col(#className="column"
+                         #,style={"width": "49.75%"}
+                         #,
+                         children=[
                         dcc.Graph(id="Stock_Chart"
 #                                  ,figure={"data":[trace_close]
 #                                  ,"layout": { "title":"Stock Evol"}
 #                                  }
                         )]
+                        , md=20
                     )
                 ,
-                html.Div(className="column"
-                         ,style={"width": "49.75%"}
-                         ,children=[#call generate function
-                      html.H3("Seeking Alpha News")
+                dbc.Col(#className="column"
+                         #,style={"width": "49.75%"}
+                         #,
+                         children=[#call generate function
+                      dbc.ModalHeader("Seeking Alpha News")
 #                      ,generate_html_table(1,input_value)
                       ,     html.Div(id='my-div') 
                        ]
                     ) 
                  ]
-)
-]
-)
-                
+                )
+
+                            ,dbc.ModalFooter(html.Div(#className="row",
+                                      children=[
+                                            html.Li(
+                                            html.A(className="icon brands fa-github"
+                                                    ,href="https://github.com/piedpipperer/Stock_Track_Dash"
+                                                    ,children=html.Span(children="Github"
+                                                               , className="label"
+                                                               )
+                                                    )
+                                            )
+                                            ]
+                ) )]
+                )
+               
+            
 # Plotly mapbox public token
 mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaTAxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g"
 # we should put our token here 
